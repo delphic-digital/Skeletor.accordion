@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Skeletor Accordion Component</title>
+</head>
+<body>
+	<p>Skeletor Accordion Component</p>
+
+	<div class="accordion js-accordion">
+		<div class="accordion__item">
+			<header class="accordion__header">
+				Lorem ipsum dolor sit amet
+			</header>
+			<section class="accordion__section">
+				<div class="accordion__body">
+					Qui offendit convenire ea. Vis eirmod graecis mentitum in. Scripta delectus an quo. Equidem elaboraret nam et,
+				</div>
+			</section>
+		</div>
+		<div class="accordion__item">
+			<header class="accordion__header">
+				Tota lucilius abhorreant nam et
+			</header>
+			<section class="accordion__section">
+				<div class="accordion__body">
+					Quem delectus reprimique eum ut. Labore admodum accommodare ut cum, has soluta assentior at. Reque placerat definitionem cum ea. Eos in facer mundi virtute, liber noluisse suscipit eam cu. Per quidam delectus at, et vel case pertinax vulputate, lobortis adipiscing eu vim.
+				</div>
+			</section>
+		</div>
+		<div class="accordion__item">
+			<header class="accordion__header">
+				Mollis diceret necessitatibus eu eum
+			</header>
+			<section class="accordion__section">
+				<div class="accordion__body">
+					Quo persequeris appellantur ex. Stet graece latine ex nec, tota illum explicari nam ne. Ne timeam mediocrem disputando vis. Et sea quem nusquam detracto. Vix ad agam omnes honestatis. Nam vitae eirmod no.
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<div class="accordion js-accordion">
+		<div class="accordion__item">
+			<header class="accordion__header">
+				Lorem ipsum dolor sit amet
+			</header>
+			<section class="accordion__section">
+				<div class="accordion__body">
+					Qui offendit convenire ea. Vis eirmod graecis mentitum in. Scripta delectus an quo. Equidem elaboraret nam et,
+				</div>
+			</section>
+		</div>
+		<div class="accordion__item">
+			<header class="accordion__header">
+				Tota lucilius abhorreant nam et
+			</header>
+			<section class="accordion__section">
+				<div class="accordion__body">
+					Quem delectus reprimique eum ut. Labore admodum accommodare ut cum, has soluta assentior at. Reque placerat definitionem cum ea. Eos in facer mundi virtute, liber noluisse suscipit eam cu. Per quidam delectus at, et vel case pertinax vulputate, lobortis adipiscing eu vim.
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<div class="accordion js-accordion-another">
+		<div class="accordion__item">
+			<header class="accordion__header">
+				Lorem ipsum dolor sit amet
+			</header>
+			<section class="accordion__section">
+				<div class="accordion__body">
+					Qui offendit convenire ea. Vis eirmod graecis mentitum in. Scripta delectus an quo. Equidem elaboraret nam et,
+				</div>
+			</section>
+		</div>
+		<div class="accordion__item">
+			<header class="accordion__header">
+				Tota lucilius abhorreant nam et
+			</header>
+			<section class="accordion__section">
+				<div class="accordion__body">
+					Quem delectus reprimique eum ut. Labore admodum accommodare ut cum, has soluta assentior at. Reque placerat definitionem cum ea. Eos in facer mundi virtute, liber noluisse suscipit eam cu. Per quidam delectus at, et vel case pertinax vulputate, lobortis adipiscing eu vim.
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.js"></script>
+	<script>
+		require.config({
+			paths: {
+				'jquery': '//code.jquery.com/jquery-3.0.0.min',
+				'velocity': '//cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min',
+				//'skeletor.core': '//rawgit.com/delphic-digital/Skeletor.core/master/skeletor.core',
+				'skeletor.core': '../../skeletor.core/skeletor.core',
+			}
+		})
+		require(['skeletor.accordion'], function(){
+			new Skeletor.Accordion($('.js-accordion'),{test: true})
+			new Skeletor.Accordion($('.js-accordion-another'),{test: true})
+		})
+
+	</script>
+</body>
+</html>
