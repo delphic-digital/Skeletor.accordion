@@ -3,16 +3,20 @@
 <head>
 	<title>Skeletor Accordion Component</title>
 	<style>
+	:focus { outline: 1px solid red;}
 		.accordion         { margin: 0 0 40px; }
 		.accordion__header { font-size: 1.5em; }
+		.accordion__header:focus { outline: 1px solid red; }
+		.accordion__item:focus { outline: 1px solid red; }
 		.accordion__body   { padding: 20px 0; }
 	</style>
 </head>
 <body>
 	<p>Skeletor Accordion Component</p>
+	<p>This contains a test <a href="">link</a></p>
 
 	<div class="accordion js-accordion">
-		<div class="accordion__item">
+		<div class="accordion__item" tabindex="0">
 			<header class="accordion__header">
 				Lorem ipsum dolor sit amet
 			</header>
@@ -45,7 +49,7 @@
 	</div>
 
 	<div class="accordion js-accordion">
-		<div class="accordion__item">
+		<div class="accordion__item" tabindex="0">
 			<header class="accordion__header">
 				Lorem ipsum dolor sit amet
 			</header>
@@ -68,7 +72,7 @@
 	</div>
 
 	<div class="accordion js-accordion-another">
-		<div class="accordion__item">
+		<div class="accordion__item" tabindex="0">
 			<header class="accordion__header">
 				Lorem ipsum dolor sit amet
 			</header>

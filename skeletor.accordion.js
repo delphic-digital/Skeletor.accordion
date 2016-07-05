@@ -91,8 +91,7 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 							.addClass('accordion__item--opened');
 						$header
 							.attr({
-								"aria-expanded": "true",
-								"aria-selected": "true"
+								"aria-expanded": "true"
 							});
 						$section
 							.attr({
