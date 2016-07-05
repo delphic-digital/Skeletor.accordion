@@ -25,7 +25,10 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 		_init: function() {
 			var self = this;
 
-			this.$element.attr('role', 'tablist');
+			this.$element.attr({
+				'role':'tablist',
+				'aria-multiselectable': true
+			});
 			this.$element.each(function(index){
 				var $this = $(this),
 				    uid = self.uuid + '-' + index, //Generate unique ID based of instance UUID and index of element
@@ -55,6 +58,7 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 				$(this).attr({
 					"role": "tabpanel",
 					"labelledby": uid+"-section-" + index,
+					"aria-hidden": "true"
 				});
 			});
 
@@ -72,7 +76,8 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 		},
 
 		open: function($item){
-			var $section = $item.find('.accordion__section');
+			var $header = $item.find('.accordion__header'),
+			    $section = $item.find('.accordion__section');
 
 			this.closeAll($item);
 
@@ -83,13 +88,24 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 					easing: this.options.easing,
 					complete: function() {
 						$item
-							.addClass('accordion__item--opened')
+							.addClass('accordion__item--opened');
+						$header
+							.attr({
+								"aria-expanded": "true",
+								"aria-selected": "true"
+							});
+						$section
+							.attr({
+								"aria-hidden": "false",
+							});
 					}
 				});
 		},
 
 		close: function($item){
-			var $section = $item.find('.accordion__section');
+			var $header = $item.find('.accordion__header'),
+			    $section = $item.find('.accordion__section');
+
 			Velocity
 				.animate($section, 'slideUp', {
 					begin: function() {},
@@ -97,7 +113,15 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 					easing: this.options.easing,
 					complete: function() {
 						$item
-							.removeClass('accordion__item--opened')
+							.removeClass('accordion__item--opened');
+						$header
+							.attr({
+								"aria-expanded": "false"
+							});
+						$section
+							.attr({
+								"aria-hidden": "true",
+							});
 					}
 				});
 		},
