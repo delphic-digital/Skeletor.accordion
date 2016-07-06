@@ -12,62 +12,54 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 	Accordion.VERSION = '0.1.0';
 	Accordion.DEFAULTS =  {
 		duration: 200,
-		easing: 'swing',
-		open: $.noop,
-		opened: $.noop,
-		close: $.noop,
-		closed: $.noop
+		easing: 'swing'
 	}
 
 	Skeletor.Plugin.create(Accordion, {
-		id: null,
-		headers: [],
+		$items: [],
+		$headers: [],
+		$sections: [],
 		_init: function() {
-			var self = this;
 
 			this.$element.attr({
 				'role':'tablist',
 				'aria-multiselectable': true
 			});
-			this.$element.each(function(index){
-				var $this = $(this),
-				    uid = self.uuid + '-' + index, //Generate unique ID based of instance UUID and index of element
-				    $items = $this.find('.accordion__item'),
-				    $headers = $this.find('.accordion__header'),
-				    $sections = $this.find('.accordion__section');
 
-				//$this.addClass(uid);
+			this.$items  = this.$element.find('.accordion__item'),
+			this.$headers  = this.$element.find('.accordion__header'),
+			this.$sections = this.$element.find('.accordion__section');
 
-				self._setAriaLabels($headers, $sections, uid)
-				self._bindEvents($items)
-			})
+			this._setAriaLabels();
+			this._bindEvents();
 		},
 
-		_setAriaLabels: function($headers, $sections, uid){
+		_setAriaLabels: function(){
+			var self = this;
 
-			$headers.each(function(index){
+			this.$headers.each(function(index){
 				$(this).attr({
 					"role": "tab",
-					"aria-controls": uid+"-section-" + index,
+					"aria-controls": self.uuid+"-section",
 					"aria-expanded": "false",
 					"aria-selected": "false"
 				});
 			});
 
-			$sections.each(function(index){
+			this.$sections.each(function(index){
 				$(this).attr({
 					"role": "tabpanel",
-					"labelledby": uid+"-section-" + index,
+					"labelledby": self.uuid+"-section",
 					"aria-hidden": "true"
 				});
 			});
 
 		},
 
-		_bindEvents: function($items) {
+		_bindEvents: function() {
 			var self = this;
-			$items.on('click.skeletor.accordion', function(e){
-				self._toggle($(this));
+			this.$headers.on('click.skeletor.accordion', function(e){
+				self._toggle($(this).closest('.accordion__item'));
 			})
 		},
 
@@ -79,7 +71,7 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 			var $header = $item.find('.accordion__header'),
 			    $section = $item.find('.accordion__section');
 
-			this.closeAll($item);
+			this.closeAll();
 
 			Velocity
 				.animate($section, 'slideDown', {
@@ -125,9 +117,9 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 				});
 		},
 
-		closeAll: function($item) {
+		closeAll: function() {
 			var self = this;
-			$item.siblings('.accordion__item--opened').each(function() {
+			this.$element.find('.accordion__item--opened').each(function() {
 				self.close($(this));
 			});
 		},

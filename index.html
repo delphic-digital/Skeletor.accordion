@@ -9,6 +9,10 @@
 		.accordion__header:focus { outline: 1px solid red; }
 		.accordion__item:focus { outline: 1px solid red; }
 		.accordion__body   { padding: 20px 0; }
+
+		.accordion__item:not(.accordion__item--opened) > .accordion__section{
+			display: none;
+		}
 	</style>
 </head>
 <body>
@@ -16,7 +20,7 @@
 	<p>This contains a test <a href="">link</a></p>
 
 	<div class="accordion js-accordion">
-		<div class="accordion__item" tabindex="0">
+		<div class="accordion__item accordion__item--opened" tabindex="0">
 			<header class="accordion__header">
 				Lorem ipsum dolor sit amet
 			</header>
@@ -49,7 +53,7 @@
 	</div>
 
 	<div class="accordion js-accordion">
-		<div class="accordion__item" tabindex="0">
+		<div class="accordion__item  accordion__item--opened" tabindex="0">
 			<header class="accordion__header">
 				Lorem ipsum dolor sit amet
 			</header>
@@ -72,7 +76,7 @@
 	</div>
 
 	<div class="accordion js-accordion-another">
-		<div class="accordion__item" tabindex="0">
+		<div class="accordion__item  accordion__item--opened" tabindex="0">
 			<header class="accordion__header">
 				Lorem ipsum dolor sit amet
 			</header>
@@ -105,8 +109,11 @@
 			}
 		})
 		require(['skeletor.accordion'], function(){
-			new Skeletor.Accordion($('.js-accordion'),{test: true})
-			new Skeletor.Accordion($('.js-accordion-another'),{test: true})
+			$('.js-accordion').each(function(){
+				new Skeletor.Accordion($(this),{test: true});
+			})
+
+			new Skeletor.Accordion($('.js-accordion-another'),{test: true});
 		})
 
 	</script>
