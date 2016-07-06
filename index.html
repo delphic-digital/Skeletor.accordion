@@ -110,10 +110,10 @@
 		})
 		require(['skeletor.accordion'], function(){
 			$('.js-accordion').each(function(){
-				new Skeletor.Accordion($(this),{test: true});
+				new Skeletor.Accordion($(this));
 			})
 
-			new Skeletor.Accordion($('.js-accordion-another'),{test: true});
+			new Skeletor.Accordion($('.js-accordion-another'),{singleOpen: false});
 		})
 
 	</script>

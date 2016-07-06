@@ -9,8 +9,11 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 		Accordion.__super__.call(this, element, options, Accordion.DEFAULTS);
 	}
 
-	Accordion.VERSION = '0.1.0';
+	Accordion.VERSION = '0.2.0';
 	Accordion.DEFAULTS =  {
+		active: 0,
+		collapsible: true,
+		singleOpen: true,
 		duration: 200,
 		easing: 'swing'
 	}
@@ -67,11 +70,22 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 			this[$item.hasClass('accordion__item--opened') ? 'close' : 'open']($item);
 		},
 
+		_getItemByIndex: function(item){
+			if (typeof item === 'number') {
+				item = this.$items.eq(item);
+			}
+			return item;
+		},
+
 		open: function($item){
+			$item = this._getItemByIndex($item);
+
 			var $header = $item.find('.accordion__header'),
 			    $section = $item.find('.accordion__section');
 
-			this.closeAll();
+			if (this.options.singleOpen) {
+				this.closeAll();
+			}
 
 			Velocity
 				.animate($section, 'slideDown', {
@@ -94,6 +108,8 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 		},
 
 		close: function($item){
+			$item = this._getItemByIndex($item);
+
 			var $header = $item.find('.accordion__header'),
 			    $section = $item.find('.accordion__section');
 
