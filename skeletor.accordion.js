@@ -98,6 +98,12 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 					"tabindex": "-1"
 				});
 			});
+
+			this.$items.on('blur.skeletor.accordion', function(e){
+				self.$items.first().attr({
+					"tabindex": "0"
+				});
+			});
 		},
 
 		_toggle: function($item){
