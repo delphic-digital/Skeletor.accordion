@@ -61,12 +61,47 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 
 		_bindEvents: function() {
 			var self = this;
+
+
+
 			this.$headers.on('click.skeletor.accordion', function(e){
-				self._toggle($(this).closest('.accordion__item'));
+				var $item = $(this).closest('.accordion__item');
+				self._toggle($item);
+			});
+
+			this.$items.on('keydown.skeletor.accordion', function(e){
+				var $item = $(this).closest('.accordion__item'),
+				    index = $item.index();
+
+				if(e.keyCode == 13){
+					//ENTER => toggle tab
+					self._toggle($item);
+				} else if (( e.keyCode == 37 || e.keyCode == 38 ) && !e.ctrlKey ) {
+					// UP or LEFT => previous tab
+					if(index==0){
+						self.$items.last().focus();
+					}else{
+						$item.prev().focus();
+					}
+				} else if (( e.keyCode == 40 || e.keyCode == 39 ) && !e.ctrlKey) {
+					// DOWN or RIGHT => next tab
+					if(index==self.$items.length-1){
+						self.$items.first().focus();
+					}else{
+						$item.next().focus();
+					}
+				}
 			})
+
+			this.$items.on('focus.skeletor.accordion', function(e){
+				self.$items.attr({
+					"tabindex": "-1"
+				});
+			});
 		},
 
 		_toggle: function($item){
+			$item.focus();
 			this[$item.hasClass('accordion__item--opened') ? 'close' : 'open']($item);
 		},
 
