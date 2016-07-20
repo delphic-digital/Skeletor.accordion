@@ -1,0 +1,6 @@
+{
+	"analytics": false,
+	"save": true,
+	"registry": "http://bowerregistry-delphic.rhcloud.com",
+	"timeout": 300000
+}

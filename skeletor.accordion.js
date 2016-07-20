@@ -9,7 +9,7 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 		Accordion.__super__.call(this, element, options, Accordion.DEFAULTS);
 	}
 
-	Accordion.VERSION = '0.2.0';
+	Accordion.VERSION = '0.1.0';
 	Accordion.DEFAULTS =  {
 		active: 0,
 		collapsible: true,

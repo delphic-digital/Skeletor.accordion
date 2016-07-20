@@ -1,0 +1,25 @@
+{
+  "name": "skeletor.accordion",
+  "main": "skeletor.accordion.js",
+  "homepage": "https://github.com/delphic-digital/Skeletor.accordion",
+  "authors": [
+    "Jeff <jmills@delphicdigital.com>"
+  ],
+  "description": "Minimal accessible accordion for Skeletor",
+  "keywords": [
+    "delphic",
+    "skeletor",
+    "accordion"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+      "skeletor.core": "*"
+  }
+}
