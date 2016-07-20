@@ -62,8 +62,6 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 		_bindEvents: function() {
 			var self = this;
 
-
-
 			this.$headers.on('click.skeletor.accordion', function(e){
 				var $item = $(this).closest('.accordion__item');
 				self._toggle($item);
