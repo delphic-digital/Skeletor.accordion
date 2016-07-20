@@ -5,11 +5,11 @@
   "authors": [
     "Jeff <jmills@delphicdigital.com>"
   ],
-  "description": "Minimal accessible accordion for Skeletor",
+  "description": "Minimal accordion for Skeletor",
   "keywords": [
-    "delphic",
     "skeletor",
-    "accordion"
+    "accordion",
+    "delphic"
   ],
   "license": "MIT",
   "ignore": [
