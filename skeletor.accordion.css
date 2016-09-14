@@ -8,20 +8,21 @@
 
 .accordion__header {
   font-size: 1.5em;
+  cursor: pointer;
 }
 
 .accordion__header:focus {
   outline: 1px solid red;
 }
 
-.accordion__header__item:focus {
+.accordion__item:focus {
   outline: 1px solid red;
 }
 
-.accordion__header__body {
-  padding: 20px 0;
+.accordion__item:not(.accordion__item--opened) > .accordion__section {
+  display: none;
 }
 
-.accordion__header__item:not(.accordion__item--opened) > .accordion__section {
-  display: none;
+.accordion__body {
+  padding: 20px 0;
 }

@@ -5,10 +5,24 @@
 
 	&__header {
 		font-size: 1.5em;
-
-		&:focus { outline: 1px solid red; }
-		&__item:focus { outline: 1px solid red; }
-		&__body   { padding: 20px 0; }
-		&__item:not(.accordion__item--opened) > .accordion__section{ display: none; }
+		cursor: pointer;
+		&:focus {
+			outline: 1px solid red;
+		}
 	}
+
+	&__item{
+		&:focus {
+			outline: 1px solid red;
+		}
+
+		&:not(.accordion__item--opened) > .accordion__section {
+			display: none;
+		}
+	}
+
+	&__body {
+		padding: 20px 0;
+	}
+
 }

@@ -9,7 +9,7 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 		Accordion.__super__.call(this, element, options, Accordion.DEFAULTS);
 	}
 
-	Accordion.VERSION = '0.1.0';
+	Accordion.VERSION = '0.2.0';
 	Accordion.DEFAULTS =  {
 		active: 0,
 		collapsible: true,
@@ -33,8 +33,13 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 			this.$headers  = this.$element.find('.accordion__header'),
 			this.$sections = this.$element.find('.accordion__section');
 
+			this.$items.first().attr({
+				"tabindex": "0"
+			})
+
 			this._setAriaLabels();
 			this._bindEvents();
+			this.show(this.options.active)
 		},
 
 		_setAriaLabels: function(){
@@ -105,8 +110,24 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 		},
 
 		_toggle: function($item){
-			$item.focus();
-			this[$item.hasClass('accordion__item--opened') ? 'close' : 'open']($item);
+				var isOtherSectionsOpen = $item.siblings('.accordion__item--opened').length>0,
+				    canClose = true;
+
+				if(!isOtherSectionsOpen && !this.options.collapsible){
+					canClose = false;
+				}
+
+				$item.focus();
+
+				if($item.hasClass('accordion__item--opened')){
+					if(canClose){
+						this.close($item)
+					}
+				}else{
+					this.open($item)
+				}
+
+				//this[($item.hasClass('accordion__item--opened')) ? (function(){if(canClose){return 'close'}})() : 'open']($item);
 		},
 
 		_getItemByIndex: function(item){
@@ -172,10 +193,59 @@ define(['jquery', 'velocity', 'skeletor.core'],function ($, Velocity, Skeletor){
 				});
 		},
 
+		show: function($item){
+			$item = this._getItemByIndex($item);
+
+			var $header = $item.find('.accordion__header'),
+			    $section = $item.find('.accordion__section');
+
+			if (this.options.singleOpen) {
+				this.hideAll();
+			}
+
+			$item
+				.addClass('accordion__item--opened');
+			$header
+				.attr({
+					"aria-expanded": "true"
+				});
+			$section
+			  .show()
+				.attr({
+					"aria-hidden": "false",
+				});
+		},
+
+		hide: function($item){
+			$item = this._getItemByIndex($item);
+
+			var $header = $item.find('.accordion__header'),
+			    $section = $item.find('.accordion__section');
+
+			$item
+				.addClass('accordion__item--opened');
+			$header
+				.attr({
+					"aria-expanded": "true"
+				});
+			$section
+			  .hide()
+				.attr({
+					"aria-hidden": "false",
+				});
+		},
+
 		closeAll: function() {
 			var self = this;
 			this.$element.find('.accordion__item--opened').each(function() {
 				self.close($(this));
+			});
+		},
+
+		hideAll: function() {
+			var self = this;
+			this.$element.find('.accordion__item--opened').each(function() {
+				self.hide($(this));
 			});
 		},
 	});
